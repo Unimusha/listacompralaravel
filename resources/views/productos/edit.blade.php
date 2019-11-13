@@ -2,6 +2,6 @@
 
 @section('content')
 
-    edit
+    edit {{ $id }}
 
 @stop

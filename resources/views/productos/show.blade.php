@@ -2,6 +2,6 @@
 
 @section('content')
 
-    show
+    show {{ $id }}
 
 @stop
