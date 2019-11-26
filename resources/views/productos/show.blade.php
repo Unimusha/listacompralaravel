@@ -11,11 +11,20 @@
     </div>
     <div class="col-sm-8">
         {{-- TODO: Datos del producto --}}
-        <p><b>Nombre: </b>{{$arrayProductos[0]}}</p> 
-        <p><b>Categoría: </b>{{$arrayProductos[1]}}</p>
-        <p><b>Estado: </b>Producto actualmente comprado</p>
-        <button type="button" class="btn btn-danger">Pendiente de compra</button>
-        <a  class="btn btn-warning" href="http://www.listacompra.test/productos/edit/{{$id}}" >Editar Producto</a>
+        <p><b>Nombre: </b>{{$producto->nombre}}</p> 
+        <p><b>Categoría: </b>{{$producto->categoria}}</p>
+     
+        @if ($producto->pendiente)
+           <p><b>Estado: </b>Disponible</p>
+            <button type="button" class="btn btn-primary">Comprar</button>
+          
+        @else
+            <p><b>Estado: </b>No Disponible</p>
+            <button type="button" class="btn btn-danger">Comprado</button>
+
+        @endif
+    
+        <a  class="btn btn-warning" href="http://www.listacompra.test/productos/edit/{{$producto->id}}" >Editar Producto</a>
         <a class="btn btn-info" href="http://www.listacompra.test/productos">Volver</a>
         
 

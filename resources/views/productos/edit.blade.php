@@ -19,22 +19,22 @@
                     @csrf
                     <div class="form-group">
                         <label for="nombre">Nombre</label>
-                        <input type="text" name="nombre" id="nomre" class="form-control"
-                            placeholder="Introduzca el nombre">
+                        <input type="text" name="nombre" id="nomre" class="form-control" 
+                            placeholder="Introduzca el nombre" value="{{$producto->nombre}}">
                     </div>
 
                     <div class="form-group">
                         {{-- TODO: Completa el input para el año --}}
                         <label for="precio">Precio</label>
                         <input type="text" name="precio" id="precio" class="form-control"
-                            placeholder="Introduzca el precio">
+                            placeholder="Introduzca el precio" value="{{$producto->precio}}">
                     </div>
 
                     <div class="form-group">
                         {{-- TODO: Completa el input para el director --}}
                         <label for="categoria">Categoría</label>
                         <input type="text" name="categoria" id="categoria" class="form-control"
-                            placeholder="Introduzca el precio">
+                            placeholder="Introduzca el precio" value="{{$producto->categoria}}">
 
                     </div>
 
@@ -42,12 +42,12 @@
                         {{-- TODO: Completa el input para el poster --}}
                         <label for="poster">Poster</label>
                         <input type="text" name="poster" id="poster" class="form-control"
-                            placeholder="Introduzca el precio">
+                            placeholder="Introduzca el precio" value="{{$producto->poster}}">
                     </div>
 
                     <div class="form-group">
                         <label for="descripcion">Descripción</label>
-                        <textarea name="descripcion" id="descripcion" class="form-control" rows="3"></textarea>
+                        <textarea name="descripcion" id="descripcion" class="form-control" rows="3" value="{{$producto->synopsis}}"></textarea>
                     </div>
 
                     <div class="form-group text-center">
