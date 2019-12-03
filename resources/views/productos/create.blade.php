@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.app')
 
 @section('content')
 
@@ -11,45 +11,46 @@
             <div class="card-body" style="padding:30px">
 
                 {{-- TODO: Abrir el formulario e indicar el método POST --}}
-                <form action="#" method="post">
+                <form action="{{ action('ProductoController@postCreate') }}" method="post">
                     {{-- TODO: Protección contra CSRF --}}
-                    @csrf
+                    @csrf 
                     <div class="form-group">
                         <label for="nombre">Nombre</label>
-                        <input type="text" name="nombre" id="nomre" class="form-control"
-                            placeholder="Introduzca el nombre">
+                        <input type="text" name="nombre" id="nombre" class="form-control"
+                            placeholder="Introduzca el nombre del producto" >
                     </div>
 
                     <div class="form-group">
                         {{-- TODO: Completa el input para el año --}}
                         <label for="precio">Precio</label>
                         <input type="text" name="precio" id="precio" class="form-control"
-                            placeholder="Introduzca el precio">
+                            placeholder="Introduzca el precio del producto" >
                     </div>
 
                     <div class="form-group">
                         {{-- TODO: Completa el input para el director --}}
                         <label for="categoria">Categoría</label>
                         <input type="text" name="categoria" id="categoria" class="form-control"
-                            placeholder="Introduzca el precio">
+                            placeholder="Introduzca la categoría del producto" >
 
                     </div>
 
                     <div class="form-group">
                         {{-- TODO: Completa el input para el poster --}}
-                        <label for="poster">Poster</label>
-                        <input type="text" name="poster" id="poster" class="form-control"
-                            placeholder="Introduzca el precio">
+                        <label for="imagen">Poster</label>
+                        <input type="text" name="imagen" id="imagen" class="form-control"
+                            placeholder="Introduzca la imágen del producto" >
                     </div>
 
                     <div class="form-group">
                         <label for="descripcion">Descripción</label>
-                        <textarea name="descripcion" id="descripcion" class="form-control" rows="3"></textarea>
+                        <textarea name="descripcion" id="descripcion" class="form-control" rows="3"
+                            placeholder="Introduzca la descripción del producto"></textarea>
                     </div>
 
                     <div class="form-group text-center">
                         <button type="submit" class="btn btn-primary" style="padding:8px 100px;margin-top:25px;">
-                            Añadir producto
+                            Crear producto
                         </button>
                     </div>
 

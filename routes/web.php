@@ -21,4 +21,6 @@ Route::group(["middleware" => "auth"], function () {
     Route::get('productos/show/{id}', 'ProductoController@getShow')->where('id', '[0-9]+');
     Route::get('productos/create', 'ProductoController@getCreate');
     Route::get('productos/edit/{id}', 'ProductoController@getEdit')->where('id', '[0-9]+');
+    Route::post("productos/postCreate", "ProductoController@postCreate")->where('id', '[0-9]+');
+    Route::put("productos/postEdit", 'ProductoController@putEdit')->where('id', '[0-9]+');
 });
