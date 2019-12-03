@@ -14,8 +14,8 @@ class AddNombreYApellidosToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('nombre')->after('remember_token');
-            $table->string('apellidos')->after('remember_token');
+            $table->string('nombre')->after('remember_token')->nullable();
+            $table->string('apellidos')->after('remember_token')->nullable();
         });
     }
 
