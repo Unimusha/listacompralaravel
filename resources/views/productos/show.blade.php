@@ -14,14 +14,24 @@
         <p><b>Nombre: </b>{{$producto->nombre}}</p> 
         <p><b>Categoría: </b>{{$producto->categoria}}</p>
      
-        @if ($producto->pendiente)
-           <p><b>Estado: </b>Disponible</p>
-            <button type="button" class="btn btn-primary">Comprar</button>
-          
-        @else
-            <p><b>Estado: </b>No Disponible</p>
-            <button type="button" class="btn btn-danger">Comprado</button>
 
+
+        @if($producto->pendiente)
+        <form action="{{ action('ProductoController@putComprar') }}" method="POST">
+            {{method_field('PUT')}}
+            @csrf
+              <p><b>Estado: </b>Disponible</p>
+            <input type="hidden" name="idHidden" value="{{$producto->id}}">
+            <button type="submit" class="btn btn-danger">Comprar</button>
+        </form>
+        @else
+        <form action="{{ action('ProductoController@putComprar') }}" method="POST">
+            {{method_field('PUT')}}
+            @csrf
+               <p><b>Estado: </b>No Disponible</p>
+            <input type="hidden" name="idHidden" value="{{$producto->id}}">
+            <button type="submit" class="btn btn-primary">Comprado</button>
+        </form>
         @endif
     
         <a  class="btn btn-warning" href="http://www.listacompra.test/productos/edit/{{$producto->id}}" >Editar Producto</a>

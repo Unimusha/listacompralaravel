@@ -47,5 +47,16 @@ $table->text("descripcion")->nullable()->default(null); */
         $p->save();
         return redirect(action('ProductoController@getIndex'));
     }
+    public function putComprar(Request $request) {
+        $producto = Producto::findOrFail($request->idHidden);
+        if ($producto->pendiente) {
+            $producto->pendiente = false;
+        } else {
+            $producto->pendiente = true;
+        }
+        $producto->save();
+ return view('productos.show', array('producto' => $producto));
+
+    }
 
 }
