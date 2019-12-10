@@ -17,7 +17,7 @@ Route::get('/', 'HomeController@getHome');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(["middleware" => "auth"], function () {
-    Route::get('productos', 'ProductoController@getIndex');
+    Route::get('productos/{categoria?}', 'ProductoController@getIndex');
     Route::get('productos/show/{id}', 'ProductoController@getShow')->where('id', '[0-9]+');
     Route::get('productos/create', 'ProductoController@getCreate');
     Route::get('productos/edit/{id}', 'ProductoController@getEdit')->where('id', '[0-9]+');

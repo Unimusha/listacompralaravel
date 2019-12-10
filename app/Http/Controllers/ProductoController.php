@@ -3,12 +3,22 @@
 namespace App\Http\Controllers;
 use App\Producto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ProductoController extends Controller {
-    public function getIndex() {
-        $productos = Producto::all();
-        return view('productos.index', array('productos' => $productos));
+    public function getIndex($categoria = null) {
+        if (isset($categoria) != null) {
+            $productos = DB::table('productos')->where('categoria', $categoria)->get();
+
+        } else {
+            $productos = Producto::all();
+        }
+        /* SELECT categoria
+        FROM productos
+        GROUP BY categoria; */
+        $todasCategorias = DB::table('productos')->select('categoria')->groupBy("categoria")->get();
+        return view('productos.index', array('productos' => $productos, "todasCategorias" => $todasCategorias));
     }
     public function getShow($id) {
         $producto = Producto::find(($id));
@@ -28,28 +38,28 @@ $table->string("imagen")->nullable()->default(null);
 $table->boolean("pendiente")->default(false);
 $table->text("descripcion")->nullable()->default(null); */
     public function putEdit(Request $request) {
-        $p              = Producto::findOrFail($request->idHidden);
-        $p->nombre      = $request->nombre;
-        $p->precio      = $request->precio;
-        $p->categoria   = $request->categoria;
+        $p            = Producto::findOrFail($request->idHidden);
+        $p->nombre    = $request->nombre;
+        $p->precio    = $request->precio;
+        $p->categoria = $request->categoria;
         /*$p->imagen      = $request->imagen;*/
-if ($request->exists('imagen')) {
-    $p->imagen = Storage::disk('public')->putFile('imagen', $request->file('imagen'));
-}
+        if ($request->exists('imagen')) {
+            $p->imagen = Storage::disk('public')->putFile('imagen', $request->file('imagen'));
+        }
         $p->descripcion = $request->descripcion;
         $p->save();
         return redirect(action('ProductoController@getIndex'));
     }
 
     public function postCreate(Request $request) {
-        $p              = new Producto;
-        $p->nombre      = $request->nombre;
-        $p->precio      = $request->precio;
-        $p->categoria   = $request->categoria;
-       /* $p->imagen      = $request->imagen;*/
-if ($request->exists('imagen')) {
-    $p->imagen = Storage::disk('public')->putFile('imagen', $request->file('imagen'));
-}
+        $p            = new Producto;
+        $p->nombre    = $request->nombre;
+        $p->precio    = $request->precio;
+        $p->categoria = $request->categoria;
+        /* $p->imagen      = $request->imagen;*/
+        if ($request->exists('imagen')) {
+            $p->imagen = Storage::disk('public')->putFile('imagen', $request->file('imagen'));
+        }
         $p->descripcion = $request->descripcion;
         $p->save();
         return redirect(action('ProductoController@getIndex'));
@@ -62,7 +72,7 @@ if ($request->exists('imagen')) {
             $producto->pendiente = true;
         }
         $producto->save();
- return view('productos.show', array('producto' => $producto));
+        return view('productos.show', array('producto' => $producto));
 
     }
 

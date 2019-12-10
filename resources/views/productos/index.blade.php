@@ -24,5 +24,11 @@
     @endforeach
 
 </div>
-
+<ul>
+@foreach ( $todasCategorias as $c)
+    <li>
+    <a href="{{ url('/productos/'.$c->categoria ) }}">{{$c->categoria}}</a>
+    </li>
+@endforeach
+</ul>
 @stop
