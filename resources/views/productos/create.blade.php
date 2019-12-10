@@ -11,7 +11,7 @@
             <div class="card-body" style="padding:30px">
 
                 {{-- TODO: Abrir el formulario e indicar el método POST --}}
-                <form action="{{ action('ProductoController@postCreate') }}" method="post">
+                <form action="{{ action('ProductoController@postCreate') }}" method="post" enctype="multipart/form-data">
                     {{-- TODO: Protección contra CSRF --}}
                     @csrf 
                     <div class="form-group">
@@ -41,6 +41,8 @@
                         <input type="text" name="imagen" id="imagen" class="form-control"
                             placeholder="Introduzca la imágen del producto" >
                     </div>
+                    <label for="avatar">Seleccionar imagen:</label>
+<input type="file" id="imagen" name="imagen">
 
                     <div class="form-group">
                         <label for="descripcion">Descripción</label>

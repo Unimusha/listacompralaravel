@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Producto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductoController extends Controller {
     public function getIndex() {
@@ -31,7 +32,10 @@ $table->text("descripcion")->nullable()->default(null); */
         $p->nombre      = $request->nombre;
         $p->precio      = $request->precio;
         $p->categoria   = $request->categoria;
-        $p->imagen      = $request->imagen;
+        /*$p->imagen      = $request->imagen;*/
+if ($request->exists('imagen')) {
+    $p->imagen = Storage::disk('public')->putFile('imagen', $request->file('imagen'));
+}
         $p->descripcion = $request->descripcion;
         $p->save();
         return redirect(action('ProductoController@getIndex'));
@@ -42,7 +46,10 @@ $table->text("descripcion")->nullable()->default(null); */
         $p->nombre      = $request->nombre;
         $p->precio      = $request->precio;
         $p->categoria   = $request->categoria;
-        $p->imagen      = $request->imagen;
+       /* $p->imagen      = $request->imagen;*/
+if ($request->exists('imagen')) {
+    $p->imagen = Storage::disk('public')->putFile('imagen', $request->file('imagen'));
+}
         $p->descripcion = $request->descripcion;
         $p->save();
         return redirect(action('ProductoController@getIndex'));

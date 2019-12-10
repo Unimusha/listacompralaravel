@@ -24,7 +24,7 @@ descripcion    Text    nulo */
             $table->bigIncrements('id');
             $table->string("nombre");
             $table->decimal("precio", 8, 2)->nullable()->default(null);
-            $table->string("categoria",64);
+            $table->string("categoria", 64);
             $table->string("imagen")->nullable()->default(null);
             $table->boolean("pendiente")->default(false);
             $table->text("descripcion")->nullable()->default(null);
