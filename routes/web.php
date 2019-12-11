@@ -24,5 +24,5 @@ Route::group(["middleware" => "auth"], function () {
     Route::post("productos/postCreate", "ProductoController@postCreate")->where('id', '[0-9]+');
     Route::put("productos/postEdit", 'ProductoController@putEdit')->where('id', '[0-9]+');
     Route::put("productos/comprar", "ProductoController@putComprar")->where('id', '[0-9]+');
-    Route::put("productos/comprado", "ProductoController@putComprado")->where('id', '[0-9]+');
+    Route::put("productos/deletecomprado", "ProductoController@deleteComprado")->where('id', '[0-9]+');
 });

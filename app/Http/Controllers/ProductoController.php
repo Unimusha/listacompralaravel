@@ -83,7 +83,7 @@ class ProductoController extends Controller {
         //return view('productos.show', array('producto' => $producto));
     }
 
-    public function putComprado(Request $request) {
+    public function deleteComprado(Request $request) {
         $producto        = Producto::findOrFail($request->idHidden);
         $user            = auth()->user();
         $pu              = new ProductoUser;

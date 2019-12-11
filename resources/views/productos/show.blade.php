@@ -25,7 +25,7 @@
             <button type="submit" class="btn btn-danger">Comprar</button>
         </form>
         @else
-        <form action="{{ action('ProductoController@putComprado') }}" method="POST">
+        <form action="{{ action('ProductoController@deleteComprado') }}" method="POST">
             {{method_field('PUT')}}
             @csrf
                <p><b>Estado: </b>No Disponible</p>
