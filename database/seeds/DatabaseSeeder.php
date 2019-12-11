@@ -3,6 +3,7 @@
 use App\Producto;
 use App\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 class DatabaseSeeder extends Seeder {
     /**
@@ -12,10 +13,12 @@ class DatabaseSeeder extends Seeder {
      */
     public function run() {
         // $this->call(UsersTableSeeder::class);
+        Schema::disableForeignKeyConstraints();
         self::seedProductos();
-       $this->command->info('Tabla productos inicializada con datos!');
+        $this->command->info('Tabla productos inicializada con datos!');
         self::seedUsers();
         $this->command->info('Tabla usuarios inicializada con datos!');
+        Schema::enableForeignKeyConstraints();
     }
     private static function seedUsers() {
         User::truncate();
@@ -39,58 +42,58 @@ class DatabaseSeeder extends Seeder {
             "apellidos" => "clemente1",
         ),
         array(
-            "name"     => "alex2",
-            "email"    => "tecnolex2@gmail.com",
-            "password" => 123,
-                        "nombre"    => "alx2",
+            "name"      => "alex2",
+            "email"     => "tecnolex2@gmail.com",
+            "password"  => 123,
+            "nombre"    => "alx2",
             "apellidos" => "clemente2",
         ),
         array(
-            "name"     => "alex3",
-            "email"    => "tecnolex3@gmail.com",
-            "password" => 123,
+            "name"      => "alex3",
+            "email"     => "tecnolex3@gmail.com",
+            "password"  => 123,
             "nombre"    => "alx3",
             "apellidos" => "clemente3",
         ),
         array(
-            "name"     => "alex4",
-            "email"    => "tecnolex4@gmail.com",
-            "password" => 123,
+            "name"      => "alex4",
+            "email"     => "tecnolex4@gmail.com",
+            "password"  => 123,
             "nombre"    => "alx4",
             "apellidos" => "clemente4",
         ),
         array(
-            "name"     => "alex5",
-            "email"    => "tecnolex5@gmail.com",
-            "password" => 123,
+            "name"      => "alex5",
+            "email"     => "tecnolex5@gmail.com",
+            "password"  => 123,
             "nombre"    => "alx5",
             "apellidos" => "clemente5",
         ),
         array(
-            "name"     => "alex6",
-            "email"    => "tecnolex6@gmail.com",
-            "password" => 123,
+            "name"      => "alex6",
+            "email"     => "tecnolex6@gmail.com",
+            "password"  => 123,
             "nombre"    => "alx6",
             "apellidos" => "clemente6",
         ),
         array(
-            "name"     => "alex7",
-            "email"    => "tecnolex7@gmail.com",
-            "password" => 123,
+            "name"      => "alex7",
+            "email"     => "tecnolex7@gmail.com",
+            "password"  => 123,
             "nombre"    => "alx7",
             "apellidos" => "clemente7",
         ),
         array(
-            "name"     => "alex8",
-            "email"    => "tecnolex8@gmail.com",
-            "password" => 123,
+            "name"      => "alex8",
+            "email"     => "tecnolex8@gmail.com",
+            "password"  => 123,
             "nombre"    => "alx8",
             "apellidos" => "clemente8",
         ),
         array(
-            "name"     => "alex9",
-            "email"    => "tecnolex9@gmail.com",
-            "password" => 123,
+            "name"      => "alex9",
+            "email"     => "tecnolex9@gmail.com",
+            "password"  => 123,
             "nombre"    => "alx9",
             "apellidos" => "clemente9",
         ));

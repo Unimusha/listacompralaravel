@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 use App\Producto;
+use App\ProductoUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+
+//SELECT * FROM `productosuser` WHERE `user_id`= $user_id AND `producto_id` = $producto_id
 
 class ProductoController extends Controller {
     public function getIndex($categoria = null) {
@@ -21,8 +24,17 @@ class ProductoController extends Controller {
         return view('productos.index', array('productos' => $productos, "todasCategorias" => $todasCategorias));
     }
     public function getShow($id) {
-        $producto = Producto::find(($id));
-        return view('productos.show', array('producto' => $producto));
+        $producto         = Producto::find(($id));
+        $user             = auth()->user();
+        $pu               = DB::table('productosuser')->where('producto_id', $id)->where('user_id', $user->id)->first();
+        $productoComprado = isset($pu);
+        if ($productoComprado) {
+            echo "Producto Comprado";
+        } else {
+            echo "Producto NO Comprado";
+        }
+
+        return view('productos.show', array('producto' => $producto, "productoComprado" => $productoComprado));
     }
     public function getCreate() {
         return view('productos.create');
@@ -31,12 +43,7 @@ class ProductoController extends Controller {
         $producto = Producto::find(($id));
         return view('productos.edit', array('id' => $id, "producto" => $producto));
     }
-/**$table->string("nombre");
-$table->decimal("precio", 8, 2)->nullable()->default(null);
-$table->string("categoria", 64);
-$table->string("imagen")->nullable()->default(null);
-$table->boolean("pendiente")->default(false);
-$table->text("descripcion")->nullable()->default(null); */
+
     public function putEdit(Request $request) {
         $p            = Producto::findOrFail($request->idHidden);
         $p->nombre    = $request->nombre;
@@ -64,16 +71,40 @@ $table->text("descripcion")->nullable()->default(null); */
         $p->save();
         return redirect(action('ProductoController@getIndex'));
     }
-    public function putComprar(Request $request) {
-        $producto = Producto::findOrFail($request->idHidden);
-        if ($producto->pendiente) {
-            $producto->pendiente = false;
-        } else {
-            $producto->pendiente = true;
-        }
-        $producto->save();
-        return view('productos.show', array('producto' => $producto));
 
+    public function putComprar(Request $request) {
+        $producto        = Producto::findOrFail($request->idHidden);
+        $user            = auth()->user();
+        $pu              = new ProductoUser;
+        $pu->user_id     = $user->id;
+        $pu->producto_id = $producto->id;
+        $pu->save();
+        return back();
+        //return view('productos.show', array('producto' => $producto));
     }
+
+    public function putComprado(Request $request) {
+        $producto        = Producto::findOrFail($request->idHidden);
+        $user            = auth()->user();
+        $pu              = new ProductoUser;
+
+       DB::table('productosuser')->where('producto_id', $producto->id)->where('user_id', $user->id)->delete();
+        return back();
+     // return view('productos.show', array('producto' => $producto));
+    }
+
+    /*
+public function putComprar(Request $request) {
+
+$producto = Producto::findOrFail($request->idHidden);
+if ($producto->pendiente) {
+$producto->pendiente = false;
+} else {
+$producto->pendiente = true;
+}
+$producto->save();
+return view('productos.show', array('producto' => $producto));
+
+}*/
 
 }

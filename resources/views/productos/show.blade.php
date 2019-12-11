@@ -16,7 +16,7 @@
      
 
 
-        @if($producto->pendiente)
+         @if(!$productoComprado)
         <form action="{{ action('ProductoController@putComprar') }}" method="POST">
             {{method_field('PUT')}}
             @csrf
@@ -25,14 +25,22 @@
             <button type="submit" class="btn btn-danger">Comprar</button>
         </form>
         @else
-        <form action="{{ action('ProductoController@putComprar') }}" method="POST">
+        <form action="{{ action('ProductoController@putComprado') }}" method="POST">
             {{method_field('PUT')}}
             @csrf
                <p><b>Estado: </b>No Disponible</p>
             <input type="hidden" name="idHidden" value="{{$producto->id}}">
             <button type="submit" class="btn btn-primary">Comprado</button>
         </form>
-        @endif
+        @endif 
+
+       
+
+    
+
+
+
+
     
         <a  class="btn btn-warning" href="http://www.listacompra.test/productos/edit/{{$producto->id}}" >Editar Producto</a>
         <a class="btn btn-info" href="http://www.listacompra.test/productos">Volver</a>
